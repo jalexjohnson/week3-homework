@@ -1,0 +1,8 @@
+<h2>Edit a Place </h2>
+<form action="/places/<%= @place.id %>/update">
+	<p>Title: <input type="text" name="title" value="<%= @place.title %>"></p>
+	<p>Photo URL: <input type="text" name="photo_url" value="<%= @place.photo_url %>"></p>
+	<p>Price: <input type="text" name="price" value="<%= sprintf "%.2f", @place.price/100.0 %>"></p>
+	<p>Description: <br><textarea name="description" rows="5" cols="100"><%= @place.description %></textarea></p>
+	<p><input type="submit" value="Submit"></p>
+</form>

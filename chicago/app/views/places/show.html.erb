@@ -1,0 +1,35 @@
+<h2><%= @place.title %></h2>
+
+<p>
+  <span class="price">Admission Price: $<%= sprintf "%.2f", (@place.price/100.0) %></span>
+  <%= link_to "(edit)", "/places/#{@place.id}/edit" %>
+</p>
+
+<img src="<%= @place.photo_url %>" height=300>
+
+<p><%= @place.description %></p>
+
+<div style="clear:both;"></div>
+<hr>
+
+<h3>Reviews</h3>
+<form action="/places/<%= @place.id %>/review">
+	<p>Title: <input type="text" name="title">
+	Rating: <select name="rating">
+					<option value="5">5 stars</option>
+					<option value="4">4 stars</option>
+					<option value="3">3 stars</option>
+					<option value="2">2 stars</option>
+					<option value="1">1 star</option>
+				</select></p>
+	<p>Review: <br><textarea name="description" rows="5" cols="100"></textarea></p>
+	<p><input type="submit" value="Submit"></p>				
+</form>
+<hr>
+  <% @reviews.each do |review| %>
+    <p>
+    	<b><%= '★' * review.rating %></b>
+    	<i><%= review.title %></i>
+    	<br><%= review.description %><hr>
+    </p>
+  <% end %>
