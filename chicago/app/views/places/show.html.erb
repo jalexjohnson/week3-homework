@@ -1,11 +1,11 @@
 <h2><%= @place.title %></h2>
-
+<%= link_to "[Edit]", "/places/#{@place.id}/edit" %>
 <p>
   <span class="price">Admission Price: $<%= sprintf "%.2f", (@place.price/100.0) %></span>
-  <%= link_to "(edit)", "/places/#{@place.id}/edit" %>
+  
 </p>
 
-<img src="<%= @place.photo_url %>" height=300>
+<img src="<%= @place.photo_url %>">
 
 <p><%= @place.description %></p>
 
@@ -14,22 +14,23 @@
 
 <h3>Reviews</h3>
 <form action="/places/<%= @place.id %>/review">
-	<p>Title: <input type="text" name="title">
-	Rating: <select name="rating">
+	<p>Title: <input type="text" name="title" size="70" maxlength="255" required></p>
+	<p>Rating: <select name="rating">
 					<option value="5">5 stars</option>
 					<option value="4">4 stars</option>
 					<option value="3">3 stars</option>
 					<option value="2">2 stars</option>
 					<option value="1">1 star</option>
 				</select></p>
-	<p>Review: <br><textarea name="description" rows="5" cols="100"></textarea></p>
+	<p>Review: <br><textarea name="description" rows="5" cols="100" maxlength="1000" required></textarea></p>
 	<p><input type="submit" value="Submit"></p>				
 </form>
 <hr>
   <% @reviews.each do |review| %>
     <p>
-    	<b><%= '★' * review.rating %></b>
-    	<i><%= review.title %></i>
+    	<b><i><%= review.title %></i>
+    	 | 
+    	<%= '★' * review.rating %></b>
     	<br><%= review.description %><hr>
     </p>
   <% end %>

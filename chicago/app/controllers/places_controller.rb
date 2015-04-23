@@ -21,7 +21,7 @@ class PlacesController < ApplicationController
 		p = Place.new
 		p.title = params["title"]
 		p.photo_url = params["photo_url"]
-		p.price = params["price"].to_f * 100
+		p.price = (params["price"].to_f * 100).round
 		p.description = params["description"]
 		p.save
 		redirect_to "/", notice: "Place created."
@@ -35,7 +35,7 @@ class PlacesController < ApplicationController
 		@place = Place.find_by(:id => params["id"])
 		@place.title = params["title"]
 		@place.photo_url = params["photo_url"]
-		@place.price = params["price"].to_f * 100
+		@place.price = (params["price"].to_f * 100).round
 		@place.description = params["description"]
 		@place.save
 		redirect_to "/places/#{@place.id}", notice: "Place updated."
